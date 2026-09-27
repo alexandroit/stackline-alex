@@ -55,7 +55,7 @@ const cli = meow(
     '  -t, --text              treat input as plain-text (not markdown)',
     '  -l, --html              treat input as html (not markdown)',
     '      --mdx               treat input as mdx (not markdown)',
-    '  -d, --diff              ignore unchanged lines (affects Travis only)',
+    '  -d, --diff              ignore unchanged lines on Travis or GitHub Actions',
     '      --reporter=REPORTER use a custom vfile-reporter',
     '      --silently-ignore   skip explicitly ignored input files',
     '  --stdin                 read from stdin',

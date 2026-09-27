@@ -89,29 +89,34 @@ test('negated flag keeps explicit-file errors, and help documents the opt-in', (
   })
 })
 
-test('the scoped diff plugin reports only warnings from changed lines', () => {
-  fixture((run, cwd) => {
-    function git(...args) {
-      const result = spawnSync('git', [
-        '-c', 'user.name=Alex test', '-c', 'user.email=alex-test@example.invalid',
-        '-c', 'commit.gpgsign=false', ...args
-      ], {cwd, encoding: 'utf8', timeout: 15000})
-      assert.ifError(result.error)
-      assert.equal(result.status, 0, result.stderr)
-      return result.stdout.trim()
-    }
-    git('init', '--quiet')
-    fs.writeFileSync(path.join(cwd, 'readme.md'), 'His document.\n\nA useful document.\n')
-    git('add', 'readme.md')
-    git('commit', '--quiet', '-m', 'Initial fixture')
-    fs.writeFileSync(path.join(cwd, 'readme.md'), 'His document.\n\nA useful document.\n\nHis new document.\n')
-    git('add', 'readme.md')
-    git('commit', '--quiet', '-m', 'Change one line')
-    assert.match(run(['readme.md']).stderr, /2 warnings/)
-    const result = run(['readme.md', '--diff'], {GITHUB_SHA: git('rev-parse', 'HEAD')})
-    assert.equal(result.status, 1, result.stderr)
-    assert.match(result.stderr, /5:1/)
-    assert.match(result.stderr, /1 warning/)
-    assert.doesNotMatch(result.stderr, /1:1/)
+for (const [kind, value, line] of [
+  ['added', 'His document.\n\nA useful document.\n\nHis new document.\n', 5],
+  ['replaced', 'His document.\n\nHis new document.\n', 3]
+]) {
+  test(`the scoped diff plugin reports only warnings from ${kind} lines`, () => {
+    fixture((run, cwd) => {
+      function git(...args) {
+        const result = spawnSync('git', [
+          '-c', 'user.name=Alex test', '-c', 'user.email=alex-test@example.invalid',
+          '-c', 'commit.gpgsign=false', ...args
+        ], {cwd, encoding: 'utf8', timeout: 15000})
+        assert.ifError(result.error)
+        assert.equal(result.status, 0, result.stderr)
+        return result.stdout.trim()
+      }
+      git('init', '--quiet')
+      fs.writeFileSync(path.join(cwd, 'readme.md'), 'His document.\n\nA useful document.\n')
+      git('add', 'readme.md')
+      git('commit', '--quiet', '-m', 'Initial fixture')
+      fs.writeFileSync(path.join(cwd, 'readme.md'), value)
+      git('add', 'readme.md')
+      git('commit', '--quiet', '-m', 'Change one line')
+      assert.match(run(['readme.md']).stderr, /2 warnings/)
+      const result = run(['readme.md', '--diff'], {GITHUB_SHA: git('rev-parse', 'HEAD')})
+      assert.equal(result.status, 1, result.stderr)
+      assert.ok(result.stderr.includes(`${line}:1`), result.stderr)
+      assert.match(result.stderr, /1 warning/)
+      assert.doesNotMatch(result.stderr, /1:1/)
+    })
   })
-})
+}

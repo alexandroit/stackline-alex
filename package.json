@@ -95,7 +95,7 @@
     "vfile-reporter": "^7.0.0",
     "vfile-sort": "^3.0.0",
     "@stackline/unified-engine": "1.0.0",
-    "@stackline/unified-diff": "1.0.0",
+    "@stackline/unified-diff": "1.0.1",
     "supports-color": "^10.2.2"
   },
   "devDependencies": {

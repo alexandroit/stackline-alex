@@ -27,6 +27,10 @@ Node.js 20.19 or newer is supported. The CLI directly uses the compatible
 is now an explicit dependency. The public type declarations are retained from
 the original published package and tested with a TypeScript consumer.
 
+The `--diff` option also retains warnings on replacement lines correctly when
+running on Travis or GitHub Actions. Previously, deleted lines in the same diff
+could shift the target line numbers and suppress a warning on a changed line.
+
 For development, run `npm ci`, `npm run build`, `npm run lint`, `npm test`, and
 `npm run test:types`. These checks do not format or rewrite source files. The
 upstream API/CLI tests remain, with additional executable-level regressions for
