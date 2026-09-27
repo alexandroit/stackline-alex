@@ -11,18 +11,23 @@ const cli = fileURLToPath(new URL('../cli.js', import.meta.url))
 
 function fixture(run) {
   const cwd = fs.mkdtempSync(path.join(os.tmpdir(), 'stackline-alex-'))
+  const env = {...process.env, NO_COLOR: '1', NO_UPDATE_NOTIFIER: '1'}
+  // Each fixture controls its own Git history, including on a CI runner.
+  for (const key of ['TRAVIS_COMMIT_RANGE', 'GITHUB_SHA', 'GITHUB_BASE_REF', 'GITHUB_HEAD_REF']) {
+    delete env[key]
+  }
   try {
     fs.writeFileSync(path.join(cwd, '.alexignore'), 'ignored.md\n*.csv\n')
     fs.writeFileSync(path.join(cwd, 'ignored.md'), 'His document.\n')
     fs.writeFileSync(path.join(cwd, 'ignored.csv'), 'His document.\n')
     fs.writeFileSync(path.join(cwd, 'readme.md'), 'A useful document.\n')
-    return run((args) => {
+    return run((args, extraEnv = {}) => {
       const result = spawnSync(process.execPath, [cli, ...args], {
         cwd,
         encoding: 'utf8',
         input: '',
         timeout: 15000,
-        env: {...process.env, NO_COLOR: '1', NO_UPDATE_NOTIFIER: '1'}
+        env: {...env, ...extraEnv}
       })
       assert.ifError(result.error)
       return result
@@ -84,10 +89,29 @@ test('negated flag keeps explicit-file errors, and help documents the opt-in', (
   })
 })
 
-test('the scoped diff plugin remains loadable through the existing CLI option', () => {
-  fixture((run) => {
-    const result = run(['readme.md', '--diff'])
-    assert.equal(result.status, 0, result.stderr)
-    assert.equal(result.stderr, 'readme.md: no issues found\n')
+test('the scoped diff plugin reports only warnings from changed lines', () => {
+  fixture((run, cwd) => {
+    function git(...args) {
+      const result = spawnSync('git', [
+        '-c', 'user.name=Alex test', '-c', 'user.email=alex-test@example.invalid',
+        '-c', 'commit.gpgsign=false', ...args
+      ], {cwd, encoding: 'utf8', timeout: 15000})
+      assert.ifError(result.error)
+      assert.equal(result.status, 0, result.stderr)
+      return result.stdout.trim()
+    }
+    git('init', '--quiet')
+    fs.writeFileSync(path.join(cwd, 'readme.md'), 'His document.\n\nA useful document.\n')
+    git('add', 'readme.md')
+    git('commit', '--quiet', '-m', 'Initial fixture')
+    fs.writeFileSync(path.join(cwd, 'readme.md'), 'His document.\n\nA useful document.\n\nHis new document.\n')
+    git('add', 'readme.md')
+    git('commit', '--quiet', '-m', 'Change one line')
+    assert.match(run(['readme.md']).stderr, /2 warnings/)
+    const result = run(['readme.md', '--diff'], {GITHUB_SHA: git('rev-parse', 'HEAD')})
+    assert.equal(result.status, 1, result.stderr)
+    assert.match(result.stderr, /5:1/)
+    assert.match(result.stderr, /1 warning/)
+    assert.doesNotMatch(result.stderr, /1:1/)
   })
 })
