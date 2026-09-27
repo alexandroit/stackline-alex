@@ -1,5 +1,49 @@
 <!--lint disable no-html first-heading-level no-shell-dollars-->
 
+# @stackline/alex
+
+An independent MIT-licensed compatibility fork of `alex@11.0.1`. The language
+checks, word lists, API exports, and default CLI behavior are preserved.
+
+```sh
+npm install --save-dev @stackline/alex
+```
+
+The executable is still named `alex`. Version 1.0.0 adds an opt-in flag for
+tools that pass explicit filenames, including pre-commit:
+
+```sh
+alex changed.md ignored.csv --silently-ignore
+```
+
+Files matched by `.alexignore` are skipped with this flag. Without it, naming an
+ignored file explicitly still reports an error. Other files are checked normally,
+and missing files remain errors. Default directory discovery continues to honor
+ignore rules automatically. This addresses the request in
+[upstream issue #348](https://github.com/get-alex/alex/issues/348).
+
+Node.js 20.19 or newer is supported. The CLI directly uses the compatible
+`@stackline/unified-engine` and `@stackline/unified-diff` forks. `supports-color`
+is now an explicit dependency. The public type declarations are retained from
+the original published package and tested with a TypeScript consumer.
+
+For development, run `npm ci`, `npm run build`, `npm run lint`, `npm test`, and
+`npm run test:types`. These checks do not format or rewrite source files. The
+upstream API/CLI tests remain, with additional executable-level regressions for
+ignored files. Tape's development-only glob dependency is updated through an
+override; it is not part of the installed runtime package.
+
+The source basis is the upstream `11.0.1` tag and the `alex@11.0.1` npm artifact,
+published on 2023-08-18. The artifact integrity is
+`sha512-rKLBZxD/lvuykdC6XB8ma9YjDl46j9ayHROZUtC1yJ2jlGpoP7RZR1tBBSjtlr260ixIW6iCkqAnHzmti5Q6CQ==`.
+The original license and contributor attribution are retained. This fork uses its
+own 1.x version series and does not imply upstream endorsement.
+
+The original guide follows. Install and import `@stackline/alex` when using this
+fork; the commands and API behavior remain compatible.
+
+---
+
 <h1 align="center">
   <img width="300" src="https://raw.githubusercontent.com/get-alex/alex/a192b46/media/logo-alex-purple.svg?sanitize=true" alt="alex">
   <br>

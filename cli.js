@@ -5,7 +5,7 @@ import {URL} from 'node:url'
 import notifier from 'update-notifier'
 import supportsColor from 'supports-color'
 import meow from 'meow'
-import {engine} from 'unified-engine'
+import {engine} from '@stackline/unified-engine'
 import {unified} from 'unified'
 import rehypeParse from 'rehype-parse'
 import remarkParse from 'remark-parse'
@@ -18,7 +18,7 @@ import rehypeRetext from 'rehype-retext'
 import vfileReporter from 'vfile-reporter'
 import retextEquality from 'retext-equality'
 import retextProfanities from 'retext-profanities'
-import unifiedDiff from 'unified-diff'
+import unifiedDiff from '@stackline/unified-diff'
 import {filter} from './filter.js'
 
 /** @type {import('type-fest').PackageJson} */
@@ -57,6 +57,7 @@ const cli = meow(
     '      --mdx               treat input as mdx (not markdown)',
     '  -d, --diff              ignore unchanged lines (affects Travis only)',
     '      --reporter=REPORTER use a custom vfile-reporter',
+    '      --silently-ignore   skip explicitly ignored input files',
     '  --stdin                 read from stdin',
     '',
     'When no input files are given, searches for markdown and text',
@@ -78,6 +79,7 @@ const cli = meow(
       html: {type: 'boolean', alias: 'l'},
       diff: {type: 'boolean', alias: 'd'},
       reporter: {type: 'string'},
+      silentlyIgnore: {type: 'boolean'},
       quiet: {type: 'boolean', alias: 'q'},
       why: {type: 'boolean', alias: 'w'}
     }
@@ -92,7 +94,7 @@ const extensions = cli.flags.html
   : textExtensions
 const defaultGlobs = ['{docs/**/,doc/**/,}*.{' + extensions.join(',') + '}']
 /** @type {boolean|undefined} */
-let silentlyIgnore
+let silentlyIgnore = cli.flags.silentlyIgnore
 /** @type {string[]|undefined} */
 let globs
 
