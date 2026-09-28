@@ -352,7 +352,7 @@ test('alex-cli', function (t) {
     childProcess.exec('./cli.js', (error, stdout, stderr) => {
       t.deepEqual(
         [error, stderr, stdout],
-        [null, 'readme.md: no issues found\n', ''],
+        [null, 'CHANGELOG.md: no issues found\nreadme.md: no issues found\n', ''],
         'should work'
       )
     })

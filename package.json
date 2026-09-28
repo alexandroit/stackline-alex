@@ -1,7 +1,7 @@
 {
   "name": "@stackline/alex",
-  "version": "1.0.0",
-  "description": "Alex 11 compatibility fork with opt-in handling of explicitly ignored files",
+  "version": "1.0.1",
+  "description": "Inclusive-language checks for prose and Markdown, preserving the alex 11 API and CLI",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -15,6 +15,7 @@
   },
   "homepage": "https://github.com/alexandroit/stackline-alex#readme",
   "keywords": [
+    "stackline",
     "cli-app",
     "cli",
     "bin",
@@ -31,7 +32,11 @@
     "neutral",
     "writing",
     "language",
-    "english"
+    "english",
+    "linter",
+    "markdown",
+    "prose",
+    "inclusive-language"
   ],
   "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
   "contributors": [
@@ -72,7 +77,8 @@
     "index.js",
     "filter.d.ts",
     "filter.js",
-    "cli.js"
+    "cli.js",
+    "CHANGELOG.md"
   ],
   "dependencies": {
     "@types/mdast": "^3.0.0",

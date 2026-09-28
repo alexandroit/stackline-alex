@@ -1,6 +1,21 @@
-<!--lint disable no-html first-heading-level no-shell-dollars-->
-
 # @stackline/alex
+
+> Inclusive-language checks for prose and Markdown, preserving the alex 11 API and CLI.
+
+[![npm version](https://img.shields.io/npm/v/@stackline/alex.svg?style=flat-square)](https://www.npmjs.com/package/@stackline/alex)
+[![license](https://img.shields.io/npm/l/@stackline/alex.svg?style=flat-square)](https://github.com/alexandroit/stackline-alex/blob/main/license)
+[![GitHub repository](https://img.shields.io/badge/GitHub-Repository-181717?style=flat-square&logo=github)](https://github.com/alexandroit/stackline-alex)
+
+**[Documentation](https://github.com/alexandroit/stackline-alex#readme)** |
+**[npm](https://www.npmjs.com/package/@stackline/alex)** |
+**[Issues](https://github.com/alexandroit/stackline-alex/issues)** |
+**[Repository](https://github.com/alexandroit/stackline-alex)**
+
+**Package version:** `1.0.1`
+
+## Why this package?
+
+<!--lint disable no-html first-heading-level no-shell-dollars-->
 
 An independent MIT-licensed compatibility fork of `alex@11.0.1`. The language
 checks, word lists, API exports, and default CLI behavior are preserved.
@@ -56,10 +71,6 @@ fork; the commands and API behavior remain compatible.
 
 > 📝 **alex** — Catch insensitive, inconsiderate writing.
 
-[![Build][build-badge]][build]
-[![Coverage][coverage-badge]][coverage]
-[![First timers friendly][first-timers-badge]][first-timers]
-
 Whether your own or someone else’s writing, **alex** helps you find gender
 favoring, polarizing, race related, or other **unequal** phrasing in text.
 
@@ -68,7 +79,7 @@ you and suggest using `their` instead of `his`.
 
 Give **alex** a spin on the [Online demo »][demo].
 
-## Why
+### Why
 
 *   [x] Helps to get better at considerate writing
 *   [x] Catches many possible offences
@@ -76,12 +87,38 @@ Give **alex** a spin on the [Online demo »][demo].
 *   [x] Reads plain text, HTML, MDX, or markdown as input
 *   [x] Stylish
 
-## Install
+### Origin story
+
+Thanks to [**@iheanyi**][iheany] for [raising the problem][tweet] and
+[**@sindresorhus**][sindre] for inspiring me ([**@wooorm**][wooorm]) to do
+something about it.
+
+When alex launched, it got some traction on [twitter][] and [producthunt][].
+Then there was a [lot][tnw] [of][dailydot] [press][vice] [coverage][bustle].
+
+## Compatibility
+
+| Item | Value |
+| --- | --- |
+| Package | `@stackline/alex@1.0.1` |
+| Supported Node.js | `>=20.19.0` |
+| Module entry | `index.js` (ES modules) |
+| Runtime dependencies | 22 direct dependencies |
+| Types | `index.d.ts` |
+| CLI | `alex` |
+
+## Installation
+
+```bash
+npm install --save-dev @stackline/alex
+```
+
+<a id="install"></a>
 
 Using [npm][] (with [Node.js][node]):
 
 ```sh
-$ npm install alex --global
+$ npm install @stackline/alex --global
 ```
 
 Using [yarn][]:
@@ -95,32 +132,16 @@ Or you can follow this step-by-step tutorial:
 
 <!--alex disable wacko stupid-->
 
-## Contents
+## Usage
 
-*   [Checks](#checks)
-*   [Integrations](#integrations)
-*   [Ignoring files](#ignoring-files)
-    *   [`.alexignore`](#alexignore)
-*   [Control](#control)
-*   [Configuration](#configuration)
-*   [CLI](#cli)
-*   [API](#api)
-    *   [`markdown(value, config)`](#markdownvalue-config)
-    *   [`mdx(value, config)`](#mdxvalue-config)
-    *   [`html(value, config)`](#htmlvalue-config)
-    *   [`text(value, config)`](#textvalue-config)
-*   [Workflow](#workflow)
-*   [FAQ](#faq)
-    *   [This is stupid!](#this-is-stupid)
-    *   [alex didn’t check “X”!](#alex-didnt-check-x)
-    *   [Why is this named alex?](#why-is-this-named-alex)
-*   [Further reading](#further-reading)
-*   [Contribute](#contribute)
-*   [Origin story](#origin-story)
-*   [Acknowledgments](#acknowledgments)
-*   [License](#license)
+```js
+import alex from '@stackline/alex';
+console.log(alex('He is a master of his craft.').messages);
+```
 
-## Checks
+## Features
+
+### Checks
 
 **alex** checks things such as:
 
@@ -146,7 +167,7 @@ all rules.
 **alex** ignores words meant literally, so `“he”`, `He — ...`, and [the
 like][literals] are not warned about.
 
-## Integrations
+### Integrations
 
 *   Sublime — [`sindresorhus/SublimeLinter-contrib-alex`](https://github.com/sindresorhus/SublimeLinter-contrib-alex)
 *   Gulp — [`dustinspecker/gulp-alex`](https://github.com/dustinspecker/gulp-alex)
@@ -161,7 +182,13 @@ like][literals] are not warned about.
 *   Figma - [`nickradford/figma-plugin-alex`](https://github.com/nickradford/figma-plugin-alex)
 *   VSCode - [`tlahmann/vscode-alex`](https://github.com/tlahmann/vscode-alex)
 
-## Ignoring files
+## Security
+
+Explicit ignored files produce errors by default; the documented --silently-ignore option changes only that handling. Missing files remain errors.
+
+## API Surface
+
+### Ignoring files
 
 The CLI searches for files with a markdown or text extension when given
 directories (so `$ alex .` will find `readme.md` and `path/to/file.txt`).
@@ -185,7 +212,7 @@ The ignore file for [this project itself][.alexignore] looks like this:
 example.md
 ```
 
-## Control
+### Control
 
 Sometimes **alex** makes mistakes:
 
@@ -256,7 +283,7 @@ Multiple messages can be controlled in one go:
 <!--alex ignore-->
 ```
 
-## Configuration
+### Configuration
 
 You can control **alex** through `.alexrc` configuration files:
 
@@ -321,7 +348,7 @@ check for.
 If you set it to `1` (maybe) then it will warn for level `1` *and* `2` (likely)
 profanities, but not for level `0` (unlikely).
 
-## CLI
+### CLI
 
 <!--alex enable wacko stupid-->
 
@@ -362,7 +389,7 @@ See `$ alex --help` for more information.
 > Otherwise, it searches for `txt`, `text`, `md`, `mkd`, `mkdn`, `mkdown`,
 > `ron`, and `markdown` extensions.
 
-## API
+<a id="api"></a>
 
 This package is [ESM only](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c):
 Node 14+ is needed to use it and it must be `import`ed instead of `require`d.
@@ -370,7 +397,7 @@ Node 14+ is needed to use it and it must be `import`ed instead of `require`d.
 [npm][]:
 
 ```sh
-$ npm install alex --save
+$ npm install @stackline/alex --save
 ```
 
 This package exports the identifiers `markdown`, `mdx`, `html`, and `text`.
@@ -394,7 +421,7 @@ shown in the example below, because it holds the possible violations.
 ###### Example
 
 ```js
-import alex from 'alex'
+import alex from '@stackline/alex'
 
 alex('We’ve confirmed his identity.').messages
 ```
@@ -440,7 +467,7 @@ Check [MDX][] (ignoring syntax).
 ###### Example
 
 ```js
-import {mdx} from 'alex'
+import {mdx} from '@stackline/alex'
 
 mdx('<Component>He walked to class.</Component>').messages
 ```
@@ -479,7 +506,7 @@ Check HTML (ignoring syntax).
 ###### Example
 
 ```js
-import {html} from 'alex'
+import {html} from '@stackline/alex'
 
 html('<p class="black">He walked to class.</p>').messages
 ```
@@ -520,7 +547,7 @@ Check plain text (as in, syntax is checked).
 ###### Example
 
 ```js
-import {markdown, text} from 'alex'
+import {markdown, text} from '@stackline/alex'
 
 markdown('The `boogeyman`.').messages // => []
 
@@ -547,7 +574,7 @@ Yields:
 ]
 ```
 
-## Workflow
+### Workflow
 
 The recommended workflow is to add **alex** to `package.json` and to run it with
 your tests in Travis.
@@ -589,7 +616,7 @@ Using this workflow, you can merge PRs if it has warnings, and then if someone
 edits an entirely different file, they won’t be bothered about existing
 warnings, only about the things they added!
 
-## FAQ
+### FAQ
 
 <!--lint disable no-heading-punctuation-->
 
@@ -612,7 +639,7 @@ It’s a nice unisex name, it was free on npm, I like it!  :smile:
 
 <!--lint enable no-heading-punctuation-->
 
-## Further reading
+### Further reading
 
 No automated tool can replace studying inclusive communication and listening to
 the lived experiences of others.
@@ -653,7 +680,21 @@ editorial skills beyond what `alex` can offer:
     where a reader’s strongest language may not be the language you are writing
     in.
 
-## Contribute
+## Local Development
+
+Clone the [repository](https://github.com/alexandroit/stackline-alex) and run the following commands from its root:
+
+```bash
+npm ci
+npm run build
+npm test
+npm run lint
+npm run test:types
+```
+
+The retained upstream development notes below include historical tooling; the commands above are the maintained package checks.
+
+### Contribute
 
 See [`contributing.md`][contributing] in [`get-alex/.github`][health] for ways
 to get started.
@@ -663,23 +704,32 @@ This project has a [Code of conduct][coc].
 By interacting with this repository, organization, or community you agree to
 abide by its terms.
 
-## Origin story
+## Release Checklist
 
-Thanks to [**@iheanyi**][iheany] for [raising the problem][tweet] and
-[**@sindresorhus**][sindre] for inspiring me ([**@wooorm**][wooorm]) to do
-something about it.
+1. Update the package version, lockfile, generated version fields, and changelog together.
+2. Run the development checks above and audit both `npm audit` and `npm audit --omit=dev`.
+3. Use the [GitHub publish workflow](https://github.com/alexandroit/stackline-alex/actions/workflows/publish.yml) with its `Prod` environment to publish the exact CI tarball.
+4. Verify public npm bytes, package identity, provenance, and the immutable GitHub release evidence.
 
-When alex launched, it got some traction on [twitter][] and [producthunt][].
-Then there was a [lot][tnw] [of][dailydot] [press][vice] [coverage][bustle].
+## Community and Support
 
-## Acknowledgments
+Report reproducible package issues in the [issue tracker](https://github.com/alexandroit/stackline-alex/issues).
+
+- [Stackline / Alexandro.Net](https://alexandro.net/)
+- [GitHub](https://github.com/alexandroit)
+- [Maintainer LinkedIn](https://www.linkedin.com/in/aleinfo/)
+- [Reddit community: r/Stackline](https://www.reddit.com/r/Stackline/)
+
+## License
+
+[MIT](https://github.com/alexandroit/stackline-alex/blob/main/license). Original copyright notices and upstream attribution are retained.
+
+### Acknowledgments
 
 Preliminary work for alex was done [in 2015][preliminary].
 The project was authored by [**@wooorm**][wooorm].
 
 Lots of [people helped since][contributors]!
-
-## License
 
 [MIT][license] © [Titus Wormer][author]
 
