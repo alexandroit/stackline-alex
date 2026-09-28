@@ -757,7 +757,7 @@ Lots of [people helped since][contributors]!
 
 [demo]: http://alexjs.com/#demo
 
-[screenshot]: screenshot.png
+[screenshot]: https://raw.githubusercontent.com/alexandroit/stackline-alex/main/screenshot.png
 
 [vfile]: https://github.com/vfile/vfile
 
@@ -811,7 +811,7 @@ Lots of [people helped since][contributors]!
 
 [contributors]: https://github.com/get-alex/alex/graphs/contributors
 
-[.alexignore]: .alexignore
+[.alexignore]: https://github.com/alexandroit/stackline-alex/blob/main/.alexignore
 
 [license]: license
 
