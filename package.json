@@ -1,6 +1,6 @@
 {
   "name": "@stackline/alex",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Inclusive-language checks for prose and Markdown, preserving the alex 11 API and CLI",
   "license": "MIT",
   "repository": {
@@ -13,13 +13,17 @@
   "funding": {
     "url": "https://github.com/sponsors/wooorm"
   },
-  "homepage": "https://github.com/alexandroit/stackline-alex#readme",
+  "homepage": "https://alexandro.net/docs/vanilla/alex/",
   "keywords": [
     "stackline",
+    "npm-package",
+    "alex",
+    "markdown",
+    "typescript",
+    "nodejs",
     "cli-app",
     "cli",
     "bin",
-    "alex",
     "equal",
     "race",
     "religion",
@@ -30,13 +34,7 @@
     "sensitive",
     "insensitive",
     "neutral",
-    "writing",
-    "language",
-    "english",
-    "linter",
-    "markdown",
-    "prose",
-    "inclusive-language"
+    "writing"
   ],
   "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
   "contributors": [
