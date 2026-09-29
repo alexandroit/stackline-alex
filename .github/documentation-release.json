@@ -4,7 +4,7 @@
     {
       "name": "@stackline/alex",
       "path": "readme.md",
-      "version": "1.0.3",
+      "version": "1.0.4",
       "baselineVersion": "1.0.2",
       "keywords": [
         "stackline",
@@ -31,8 +31,8 @@
       "homepage": "https://alexandro.net/docs/vanilla/alex/",
       "baselineTarball": "https://registry.npmjs.org/@stackline/alex/-/alex-1.0.2.tgz",
       "baselineIntegrity": "sha512-K9XyPzVjAWVoDTJH657PLuKpew6xqA8kW6B7dF5tH6jeya20tnPYJz+gRLMt2Iwx8a4KAgMqDmk7WKs3s0HkpA==",
-      "expectedSha512": "f8d3f9effa2cec2f2697a713d0e6881657e36ec6b39bb1e38ecaa947f4beb15c12f30275c96d7530294ae1197851cb036409d07a3d6ef7b2db379f0ad1fc6a6f",
-      "tag": "docs-stackline-alex-v1.0.3"
+      "expectedSha512": "43dabf9414a45d6e7e377b1beda533319ea19d68fcd9cac3d25c7b3447a560c612a38b0f56f8d380ec6af9c49e153bc51c41b222412fbd0e67f372f3d2d53590",
+      "tag": "docs-stackline-alex-v1.0.4"
     }
   ]
 }
