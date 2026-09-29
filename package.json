@@ -1,6 +1,6 @@
 {
   "name": "@stackline/alex",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Inclusive-language checks for prose and Markdown, preserving the alex 11 API and CLI",
   "license": "MIT",
   "repository": {
@@ -81,27 +81,27 @@
     "CHANGELOG.md"
   ],
   "dependencies": {
-    "@types/mdast": "^3.0.0",
-    "@types/nlcst": "^1.0.0",
+    "@types/mdast": "npm:@stackline/types-mdast@1.0.0",
+    "@types/nlcst": "npm:@stackline/types-nlcst@1.0.0",
     "meow": "^11.0.0",
-    "rehype-parse": "^8.0.0",
-    "rehype-retext": "^3.0.0",
-    "remark-frontmatter": "^4.0.0",
-    "remark-gfm": "^3.0.0",
-    "remark-mdx": "2.0.0",
-    "remark-message-control": "^7.0.0",
-    "remark-parse": "^10.0.0",
-    "remark-retext": "^5.0.0",
-    "retext-english": "^4.0.0",
-    "retext-equality": "~6.6.0",
-    "retext-profanities": "~7.2.0",
-    "unified": "^10.0.0",
-    "update-notifier": "^6.0.0",
-    "vfile": "^5.0.0",
-    "vfile-reporter": "^7.0.0",
-    "vfile-sort": "^3.0.0",
-    "@stackline/unified-engine": "1.0.0",
-    "@stackline/unified-diff": "1.0.1",
+    "rehype-parse": "npm:@stackline/rehype-parse@1.0.0",
+    "rehype-retext": "npm:@stackline/rehype-retext@1.0.0",
+    "remark-frontmatter": "npm:@stackline/remark-frontmatter@1.0.0",
+    "remark-gfm": "npm:@stackline/remark-gfm@1.0.0",
+    "remark-mdx": "npm:@stackline/remark-mdx@1.0.0",
+    "remark-message-control": "npm:@stackline/remark-message-control@1.0.0",
+    "remark-parse": "npm:@stackline/remark-parse@1.0.0",
+    "remark-retext": "npm:@stackline/remark-retext@1.0.0",
+    "retext-english": "npm:@stackline/retext-english@1.0.0",
+    "retext-equality": "npm:@stackline/retext-equality@1.0.0",
+    "retext-profanities": "npm:@stackline/retext-profanities@1.0.0",
+    "unified": "npm:@stackline/unified@1.0.0",
+    "update-notifier": "npm:@stackline/update-notifier@1.0.0",
+    "vfile": "npm:@stackline/vfile@1.0.0",
+    "vfile-reporter": "npm:@stackline/vfile-reporter@1.0.0",
+    "vfile-sort": "npm:@stackline/vfile-sort@1.0.0",
+    "@stackline/unified-engine": "1.0.2",
+    "@stackline/unified-diff": "1.0.3",
     "supports-color": "^10.2.2"
   },
   "devDependencies": {
@@ -109,7 +109,7 @@
     "eslint": "^10.11.0",
     "tape": "^5.10.2",
     "typescript": "^7.0.2",
-    "vfile-reporter-json": "^3.3.0"
+    "vfile-reporter-json": "npm:@stackline/vfile-reporter-json@1.0.0"
   },
   "scripts": {
     "build": "node scripts/check-artifacts.js",
@@ -117,7 +117,8 @@
     "test-api": "node test/index.js",
     "test": "npm run test-api && node --test test/ignore.test.js",
     "test:types": "tsc -p test/types/tsconfig.json",
-    "prepack": "npm run build"
+    "prepack": "npm run build",
+    "test:package": "node scripts/test-package.mjs"
   },
   "alex": {
     "allow": [

@@ -11,7 +11,7 @@
 **[Issues](https://github.com/alexandroit/stackline-alex/issues)** |
 **[Repository](https://github.com/alexandroit/stackline-alex)**
 
-**Package version:** `1.0.1`
+**Package version:** `1.0.2`
 
 ## Why this package?
 
@@ -100,7 +100,7 @@ Then there was a [lot][tnw] [of][dailydot] [press][vice] [coverage][bustle].
 
 | Item | Value |
 | --- | --- |
-| Package | `@stackline/alex@1.0.1` |
+| Package | `@stackline/alex@1.0.2` |
 | Supported Node.js | `>=20.19.0` |
 | Module entry | `index.js` (ES modules) |
 | Runtime dependencies | 22 direct dependencies |
