@@ -1,6 +1,6 @@
 {
   "name": "@stackline/alex",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Inclusive-language checks for prose and Markdown, preserving the alex 11 API and CLI",
   "license": "MIT",
   "repository": {
